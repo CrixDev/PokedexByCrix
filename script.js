@@ -1,3 +1,4 @@
+let currentPokemonId = null;
 function buscarPokemon() {
   let inputId = `PokemonInput`;
   console.log(document.getElementById(inputId).value.trim().toLowerCase());
@@ -6,9 +7,44 @@ function buscarPokemon() {
 
   fetch(urlApi)
     .then((Response) => Response.json())
-    .then((datosPokemon) => mostrarPokemon(datosPokemon))
+    .then((datosPokemon) => {
+      mostrarPokemon(datosPokemon);
+      currentPokemonId = datosPokemon.id;
+    })
     .catch(() => mostrarError());
 
+}
+
+function subirPokemon(){
+  if (currentPokemonId !== null) {
+    let nextPokemonId = currentPokemonId + 1;
+    let urlApi = `https://pokeapi.co/api/v2/pokemon/${nextPokemonId}`;
+
+    fetch(urlApi)
+      .then((Response) => Response.json())
+      .then((datosPokemon) => {
+        mostrarPokemon(datosPokemon);
+        currentPokemonId = datosPokemon.id;
+      })
+      .catch(() => mostrarError());
+  }
+
+}
+
+
+function bajarPokemon() {
+  if (currentPokemonId !== null && currentPokemonId > 1) { // El ID de los Pokémon empieza en 1
+    let prevPokemonId = currentPokemonId - 1;
+    let urlApi = `https://pokeapi.co/api/v2/pokemon/${prevPokemonId}`;
+
+    fetch(urlApi)
+      .then((Response) => Response.json())
+      .then((datosPokemon) => {
+        mostrarPokemon(datosPokemon);
+        currentPokemonId = datosPokemon.id;
+      })
+      .catch(() => mostrarError());
+  }
 }
 
 // Mostrar información del Pokémon
