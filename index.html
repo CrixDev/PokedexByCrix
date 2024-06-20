@@ -5,14 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokedex By Crix</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css">   
 </head>
 <body>
     <div class="container">
         <h1>Pokedex By Crix</h1>
         <div class="card">
-            <input type="text" id="PokemonInput" placeholder="Nombre o Numero de pokemon">
-            <button onclick="buscarPokemon()">Buscar pokemon</button>
+            
+            <form id="pokemonForm" onsubmit="event.preventDefault(); buscarPokemon();">
+                <input type="text" id="PokemonInput" placeholder="Nombre o Numero de pokemon">
+                <button type="submit">Buscar pokemon</button>
+                <button type="button" onclick="subirPokemon()">UP</button>
+                <button type="button" onclick="bajarPokemon()">DOWN</button>
+            </form>
             <div id="PokemonInfo"></div>
         </div>
     </div>
