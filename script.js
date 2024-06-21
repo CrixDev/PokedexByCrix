@@ -52,13 +52,19 @@ function mostrarPokemon(datosPokemon) {
   let infoDivId = `PokemonInfo`;
   let infoDiv = document.getElementById(infoDivId);
  console.log(datosPokemon);
+ let typesHtml = datosPokemon.types.map(typeInfo => {
+  return `<h2 class="pk-type">${typeInfo.type.name}</h2>`;
+}).join('');
 
   infoDiv.innerHTML = `
         <h2 class="pk-name">${datosPokemon.name}</h2>
         <img class="pk-imgBig" src = "${datosPokemon.sprites.other["official-artwork"].front_default}">
+        <h2 class="pk-type1"${datosPokemon.types_1}</h2>
         <img class="pk-imgSmall" src = "${datosPokemon.sprites.front_default}">
         <h3 class="pk-n">ID: ${datosPokemon.id}</h3>
          <h3 class="pk-peso">Peso: ${datosPokemon.height}</h3>
+          ${typesHtml}
+
        
     `;
 }
